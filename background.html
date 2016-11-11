@@ -1,0 +1,32 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+
+<head>
+    <title>Tree Tab Manager</title>
+    <script src="background.js"></script>
+    <script src="treeTabManager.js"></script>
+    <script src="eventListeners.js"></script>
+    <script>
+    chrome.tabs.onCreated.addListener(function() {
+                alert('hello new tab'
+                });
+    </script>
+    <!-- <script src="background.js"></script> -->
+</head>
+
+<body>
+    <script>
+    chrome.tabs.onCreated.addListener(
+    	function(){
+    		console.log("hello");
+    	});
+    </script>
+    	How are you doing
+</body>
+
+</html>
