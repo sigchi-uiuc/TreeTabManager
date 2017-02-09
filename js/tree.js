@@ -2,6 +2,8 @@
 
 function Node(data) {
     this.data = data;
+    this.url = "";
+    this.title = "";
     this.parent = null;
     this.children = [];
 }
