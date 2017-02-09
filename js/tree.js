@@ -1,23 +1,23 @@
 //Lifted from https://code.tutsplus.com/articles/data-structures-with-javascript-tree--cms-23393
 
-function Node(data) {
-    this.alive = true;
-    this.tab_id = -1;
-    this.url = null;
-    this.title = null;
-    this.favicon_url = null;
-    this.parent = null;
-    this.children = [];
+function Node(alive, tab_id, url, title, favicon_url, parent, children) {
+    this._alive = alive;
+    this._tab_id = tab_id;
+    this._url = url;
+    this._title = title;
+    this._favicon_url = favicon_url;
+    this._parent = parent;
+    this._children = children;
 }
 
 function Tree(data) {
-    var node = new Node(data);
+    var node = new Node(true, -1, null, null, null, null, []);
     this._root = node;
 }
 
-var tree = new Tree('Base');
+var tree = new Tree();
 
-tree._root;
+
 
 
 
