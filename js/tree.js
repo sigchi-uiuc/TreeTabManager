@@ -4,6 +4,7 @@ function Node(data) {
     this.data = data;
     this.url = "";
     this.title = "";
+    this.favicon_url = "";
     this.parent = null;
     this.children = [];
 }
