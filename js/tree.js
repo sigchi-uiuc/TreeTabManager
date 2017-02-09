@@ -1,7 +1,8 @@
 //Lifted from https://code.tutsplus.com/articles/data-structures-with-javascript-tree--cms-23393
 
 function Node(data) {
-    this.data = data;
+    this.alive = true;
+    this.tab_id = -1;
     this.url = null;
     this.title = null;
     this.favicon_url = null;
