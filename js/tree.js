@@ -2,9 +2,9 @@
 
 function Node(data) {
     this.data = data;
-    this.url = "";
-    this.title = "";
-    this.favicon_url = "";
+    this.url = null;
+    this.title = null;
+    this.favicon_url = null;
     this.parent = null;
     this.children = [];
 }
