@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+/* line 6, ../sass/tree_view.scss */
+h1 {
+  text-align: center;
+}
+
+/* line 11, ../sass/tree_view.scss */
+.mainView {
+  width: 600px;
+  height: 400px;
+  font-family: "Open Sans";
+}

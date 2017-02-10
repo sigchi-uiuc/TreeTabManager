@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
+$openSans: 'Open Sans';
+
+
+h1 {
+	text-align: center;
+}
+
+
+.mainView {
+	width: 600px;
+	height: 400px;
+	font-family: $openSans;
+
+}

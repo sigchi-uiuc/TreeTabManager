@@ -12,19 +12,19 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
 // });
 chrome.tabs.onCreated.addListener(function(tab){
-	alert("New Tab Created:" +
-		+"\n" + tab.id 
-		+"\n" + "Hi"
-		+"\n" + tab.windowId
-		+"\n" + tab.active
-		+"\n" + tab.title
-		);
+	// alert("New Tab Created:" +
+	// 	+"\n" + tab.id 
+	// 	+"\n" + "Hi"
+	// 	+"\n" + tab.windowId
+	// 	+"\n" + tab.active
+	// 	+"\n" + tab.title
+	// 	);
 
 });
 
 // //tab removed listener
 chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
-	alert("Tab deleted: "+tabId );
+	// alert("Tab deleted: "+tabId );
 });
 
 // //tab updated listener
