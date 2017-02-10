@@ -22,6 +22,7 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
 	// alert("Tab deleted: "+tabId );
 });
 
+var data_test = "data test succsss";
 // //tab updated listener
 // chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 // 	// alert("Tab was updated"); 	
