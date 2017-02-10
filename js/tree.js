@@ -1,4 +1,3 @@
-//Lifted from https://code.tutsplus.com/articles/data-structures-with-javascript-tree--cms-23393
 
 function Node(alive, tab_id, url, title, favicon_url, parent, children) {
     this._alive = alive;
@@ -9,16 +8,23 @@ function Node(alive, tab_id, url, title, favicon_url, parent, children) {
     this._parent = parent;
     this._children = children;
 }
-
 function Tree(data) {
     var node = new Node(true, -1, null, null, null, null, []);
     this._root = node;
 }
 
-var tree = new Tree();
+//Note: Will most likely fail if called on root.
+function deleteSelfAndChildren(node){
+    if(node == null){
+        return;
+    }
+    node._children.forEach(deleteSelfAndChildren);
 
-
-
+    var index = node._parent._children.indexOf(node);
+    if(index > -1){
+        node._parent._children.splice(index,1);
+    }
+}
 
 
 
