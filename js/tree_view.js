@@ -1,5 +1,5 @@
-$("h1").clicked(function() {
-	alert("h1 is clicked");
+$(document).ready(function(){
+	$('.title').click(function(){
+		$(".title").css({"color": "red"});
+	})
 });
-
-console.log("hello");
