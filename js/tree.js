@@ -1,15 +1,15 @@
 
-function Node(alive, tab_id, url, title, favicon_url, parent, children) {
+function Node(alive, tab_id, url, title, favicon_url, children) {
     this._alive = alive;
     this._tab_id = tab_id;
     this._url = url;
     this._title = title;
     this._favicon_url = favicon_url;
-    this._parent = parent;
+    // this._parent = parent;
     this._children = children;
 }
 function Tree() {
-    var node = new Node(true, -1, null, null, null, null, []);
+    var node = new Node(true, -1, "hello.com", "hello1", "hsdofiha.lajksd", []);
     this._root = node;
 }
 
@@ -27,7 +27,6 @@ function deleteSelfAndChildren(node){
 }
 function AddChild(parent,child) {
     (parent._children).push(child);
-    child._parent=parent;
 }
 function Traversal(node){
     console.log(node._title);
