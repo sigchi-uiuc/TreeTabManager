@@ -7,26 +7,32 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 	});
 
 chrome.tabs.onCreated.addListener(function(tab){
-	// alert("New Tab Created:" +
-	// 	+"\n" + tab.id 
-	// 	+"\n" + "Hi"
-	// 	+"\n" + tab.windowId
-	// 	+"\n" + tab.active
-	// 	+"\n" + tab.title
-	// 	);
-
+	alert("New Tab Created:" +
+		+"\n" + tab.id 
+		+"\n" + "Hi"
+		+"\n" + tab.windowId
+		+"\n" + tab.active
+		+"\n" + tab.title
+		);
 });
 
 // //tab removed listener
-chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
-	// alert("Tab deleted: "+tabId );
-});
 
-var data_test = "data test succsss";
+function handleRemoved(tabId, removeInfo) {
+  alert("Tab: " + tabId + " is closing \n Window ID: " + removeInfo.windowId + "\nWindow is closing: " + removeInfo.isWindowClosing );
+}
+
+chrome.tabs.onRemoved.addListener(handleRemoved);
+
+
+// var data_test = "data test succsss";
 // //tab updated listener
-// chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-// 	// alert("Tab was updated"); 	
-// });
+
+function handleUpdated(tabId, changeInfo) {
+  alert("Tab: " + tabId + " is updated \n Status: " + changeInfo.status + "\nTitle: " + changeInfo.title + "\n URL: " + changeInfo.url );
+}
+chrome.tabs.onUpdated.addListener(handleUpdated);
+
 //tab detached listener
 // chrome.tabs.onDetached.addListener(function(tabId,detachInfo){
 // 	alert("Tab: "+tabId" was detached"); //Alert box pops up once 
