@@ -45,11 +45,11 @@ var treeData = [
         "parent": "Top Level",
         "children": [
           {
-            "name": "Son of A",
+            "name": "Level 3: C",
             "parent": "Level 2: A"
           },
           {
-            "name": "Daughter of A",
+            "name": "Level 3: D",
             "parent": "Level 2: A"
           }
         ]
