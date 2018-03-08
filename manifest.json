@@ -8,7 +8,7 @@
     "tabs"
   ],
   "background": {
-    "scripts": ["js/event.js"],
+    "scripts": ["js/event.js","js/tree.js"],
     "persistent":false
   },
   "browser_action": {
