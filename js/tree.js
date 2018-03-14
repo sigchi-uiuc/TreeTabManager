@@ -1,14 +1,14 @@
 
     var treeData = [];
     var rootNode = new Node("One", 23832, "test.com", 48248);
-    
-    function push(){
 
+    function push(newNode, nodeList){
+      nodeList.append(newNode);
     }
 
     function addNode(title, id, link, openerTabId){
         if(openerTabId == undefined){
-            rootNode = new Node(title,id,link,openerTabId); 
+            rootNode = new Node(title,id,link,openerTabId);
         }
         else{
             var temp = new Node(title,id,link,openerTabId);
@@ -29,7 +29,7 @@
         this.children = {};
 
         alert("New Node Object Created: "
-        +title+"\n id: " + id 
+        +title+"\n id: " + id
         +"\n link: " + link
         +"\n openerTabId: " + openerTabId
         // +"\n children: " + children
@@ -77,7 +77,7 @@ $(document).ready(function() {
 
     /******* TESTING JSON AND D3 *********/
 // var tree1 = JSON.stringify(tree._root)
-// var treeData = JSON.parse(tree1); 
+// var treeData = JSON.parse(tree1);
 // console.log(tree1);
 
 // Traversal(tree._root);
@@ -166,7 +166,7 @@ root.y0 = 100;
 console.log(rootNode);
 
 update(root);
- 
+
 d3.select(self.frameElement).style("height", "500px");
 
 function update(source) {
