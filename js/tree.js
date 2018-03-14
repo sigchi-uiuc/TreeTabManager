@@ -38,11 +38,24 @@
         // var children_counter=0;
         // this._openerTabId;
     }
-    function addChild(openerTabId, tabid){
+
+    function addChild(openerTabId, tab){
+        addChildHelper(openerTabId, tab);
         alert("Children added");
     }
 
-    // function (parent,child) {
+    function addChildHelper(parentId, currTab, nTab) {
+    	if (currTab.name == parentId) {
+    		// use push
+    		push(nTab, currTab.children);
+    	} else {
+    		for (var i = 0; i < currTab.children.length; i++) {
+    			addChildHelper(parentId, currTab.children[i], nTab);
+    		}
+    	}
+    }
+
+    // function (parent, child) {
         // (parent._children).push(child);
     // }
 
