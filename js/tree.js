@@ -12,7 +12,7 @@
         }
         else{
             var temp = new Node(title,id,link,openerTabId);
-            // addChild(openerTabId,tabid);
+            addChild(openerTabId, temp);
         }
     }
 
@@ -40,7 +40,7 @@
     }
 
     function addChild(openerTabId, tab){
-        addChildHelper(openerTabId, tab);
+        addChildHelper(openerTabId, rootNode, tab);
         alert("Children added");
     }
 
