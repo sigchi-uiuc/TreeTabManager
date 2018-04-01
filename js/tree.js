@@ -1,11 +1,9 @@
 var count = 0;
 
-<<<<<<< HEAD
 var treeData = [];
 var rootNode;
-=======
-    var treeData = [];
-    var rootNode = new Node("One", 23832, "test.com", 48248);
+   
+//     var rootNode = new Node("One", 23832, "test.com", 48248);
 
     function push(newNode, nodeList){
       nodeList.append(newNode);
@@ -133,11 +131,6 @@ var treeData2 = [
 
 
 
-
-
-
->>>>>>> 442025b95b55733cf04861f563cd1698727fc530
-
 function Tree() {
     alert("Tree created");
     return treeData;
@@ -192,7 +185,6 @@ console.log(treeData);
 //         Traversal(node._children[i]);
 //     }
 
-<<<<<<< HEAD
 // }
 // var run = "hello";
 =======
@@ -329,8 +321,6 @@ function update(source) {
   d.y0 = d.y;
   });
 }
->>>>>>> 442025b95b55733cf04861f563cd1698727fc530
-
 // var roots = { 0:targetJson};
 
     console.log("TEST BEFORE JQUERY:");
