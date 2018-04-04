@@ -6,6 +6,7 @@ chrome.tabs.onCreated.addListener(function(tab){
     if (tab.openerTabId == null) {
     	// rootNode = new Node ("test", count, "test.com", count+4);
         rootNode = new Node(tab.title, tab.id, tab.url, tab.openerTabId);
+        console.log("New Tree Opened");
         // alert("New Window");
         // console.log(rootNode);
     	treeData.push(rootNode);
@@ -13,8 +14,9 @@ chrome.tabs.onCreated.addListener(function(tab){
     	alert("TreeData Pushed to");
     } 
     else {
-            var temp = new Node(tab.title, tab.id, tab.url, tab.openerTabId);
-            addChild(tab.openerTabId, temp);
+        console.log("New Tab in tree");
+        var temp = new Node(tab.title, tab.id, tab.url, tab.openerTabId);
+        addChild(tab.openerTabId, temp);
     }
     var myJson = JSON.stringify(treeData);
     console.log(myJson);
@@ -39,7 +41,10 @@ chrome.tabs.onRemoved.addListener(handleRemoved);
 function handleUpdated(tabId, changeInfo) {
   // alert("Tab: " + tabId + " is updated \n Status: " 
   	// + changeInfo.status + "\nTitle: " + changeInfo.title + "\n URL: " + changeInfo.url );
+
+
 }
+
 chrome.tabs.onUpdated.addListener(handleUpdated);
 
 // //message listener (from popup manipulation)

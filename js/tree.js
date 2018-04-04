@@ -1,34 +1,30 @@
-var count = 0;
-var treeData = [];
-var rootNode;
+    var count = 0;
     var treeData = [];
+    var rootNode;
     // var rootNode = new Node("One", 23832, "test.com", 48248);
 
     function push(newNode, nodeList){
       nodeList.append(newNode);
     }
 
-    function addNode(title, id, link, openerTabId){
-        if(openerTabId == undefined){
-            rootNode = new Node(title,id,link,openerTabId);
-        }
-        else{
-            var temp = new Node(title,id,link,openerTabId);
-            addChild(openerTabId, temp);
-        }
-    }
 
     function Tree() {
         alert("Tree created");
         treeData.push(rootNode);
         var treeDataParsed = JSON.stringify(treeData);
     }
+
     function Node(title, id, link, openerTabId) {
         this.name = title;
         this.id = id;
         this.url = link;
-        this.parent = openerTabId;
-        this.children = {};
+        if(openerTabId==null) {
+            this.parent = 2308;
+        }
+        else {
+            this.parent = openerTabId;
+        }
+        this.children = [];
 
         alert("New Node Object Created: "
         +title+"\n id: " + id
@@ -39,6 +35,7 @@ var rootNode;
         // this._children = children;
         // var children_counter=0;
         // this._openerTabId;
+
     }
 
     function addChild(openerTabId, tab){
@@ -47,11 +44,13 @@ var rootNode;
     }
 
     function addChildHelper(parentId, currTab, nTab) {
-    	if (currTab.name == parentId) {
+    	var temp = currTab.children;
+        if (currTab.id == parentId) {
     		// use push
-    		push(nTab, currTab.children);
+    		temp.push(nTab);
     	} else {
-    		for (var i = 0; i < currTab.children.length; i++) {
+            console.log("False");
+    		for (var i = 0; i < temp.length; i++) {
     			addChildHelper(parentId, currTab.children[i], nTab);
     		}
     	}

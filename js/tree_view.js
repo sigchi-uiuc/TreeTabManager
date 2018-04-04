@@ -41,8 +41,10 @@ var treeData4 = [
     ]
   }
 ];
+
+
   var treeData2 = localStorage.getItem("rootNode");
-  console.log(treeData2);
+  // console.log(treeData2);
   var treeData = JSON.parse(treeData2);
   console.log(treeData);
   var margin = {top: 20, right: 120, bottom: 20, left: 120},
@@ -55,8 +57,8 @@ var treeData4 = [
           .attr("height", height + margin.top + margin.bottom);
 
   var i = 0,
-    duration = 750,
-    root;
+  duration = 750,
+  root;
 
   var tip = d3.tip()
             .attr('class', 'd3-tip')
