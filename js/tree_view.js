@@ -1,8 +1,5 @@
 $(document).ready(function() {
-    $('.title').click(function() {
-        $(".title").css({ "color": "red" });
-        d3.selectAll("p").style("color", "white").fadeIn(300);
-    });
+
     // var treeData = document.getElementById("main");
 
     /******* TESTING JSON AND D3 *********/
@@ -47,8 +44,8 @@ var treeData4 = [
   // console.log(treeData2);
   var treeData = JSON.parse(treeData2);
   console.log(treeData);
-  var margin = {top: 20, right: 120, bottom: 20, left: 120},
-    width = 800- margin.right - margin.left,
+  var margin = {top: 80, right: 0, bottom: 50, left: 30},
+    width = 1600 - margin.right - margin.left,
     height = 500 - margin.top - margin.bottom;
 
   var svg = d3.select("#body")
@@ -65,7 +62,7 @@ var treeData4 = [
             .offset([10, 0])
             .direction("s")
             .html(function(d) {
-                return d.name;
+                return d.url;
             });
 
   svg.call(tip);
@@ -117,7 +114,7 @@ var treeData4 = [
       .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d._title; })
+      .text(function(d) { return d.name; })
       .style("transform", "translate(200px,0px")
       .style("fill-opacity", 1e-6);
 
@@ -127,8 +124,7 @@ var treeData4 = [
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
     nodeUpdate.select("circle")
-      .attr("r", 10)
-      .style("fill", function(d) { return "black"});
+      .attr("r", 10);
 
     nodeUpdate.select("text")
       .style("fill-opacity", 1);

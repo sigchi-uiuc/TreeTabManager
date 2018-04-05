@@ -1,20 +1,18 @@
 chrome.tabs.onCreated.addListener(function(tab){
 	// alert("Tab created");
-	alert("New Tab Created");
+	// alert("New Tab Created");
 	// Node.addNode(temp);
     // count++;
     if (tab.openerTabId == null) {
     	// rootNode = new Node ("test", count, "test.com", count+4);
         rootNode = new Node(tab.title, tab.id, tab.url, tab.openerTabId);
-        console.log("New Tree Opened");
-        // alert("New Window");
-        // console.log(rootNode);
+        console.log(tab.title + " Opened");
     	treeData.push(rootNode);
-        // console.log(treeData);
-    	alert("TreeData Pushed to");
+
     } 
     else {
-        console.log("New Tab in tree");
+        // console.log("New Tab in tree");
+        console.log(tab.title + " Opened");
         var temp = new Node(tab.title, tab.id, tab.url, tab.openerTabId);
         addChild(tab.openerTabId, temp);
     }
@@ -30,6 +28,8 @@ function handleCreation(tab){
 // //tab removed listener
 function handleRemoved(tabId, removeInfo) {
   // alert("Tab: " + tabId + " is closing \n Window ID: " + removeInfo.windowId + "\nWindow is closing: " + removeInfo.isWindowClosing);
+
+
 }
 
 chrome.tabs.onRemoved.addListener(handleRemoved);

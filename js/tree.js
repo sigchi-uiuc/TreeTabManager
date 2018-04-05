@@ -3,13 +3,9 @@
     var rootNode;
     // var rootNode = new Node("One", 23832, "test.com", 48248);
 
-    function push(newNode, nodeList){
-      nodeList.append(newNode);
-    }
-
 
     function Tree() {
-        alert("Tree created");
+        // alert("Tree created");
         treeData.push(rootNode);
         var treeDataParsed = JSON.stringify(treeData);
     }
@@ -26,12 +22,13 @@
         }
         this.children = [];
 
-        alert("New Node Object Created: "
-        +title+"\n id: " + id
-        +"\n link: " + link
-        +"\n openerTabId: " + openerTabId
-        // +"\n children: " + children
-        );
+        // alert("New Node Object Created: "
+        // +"\n title: " + title
+        // +"\n id" + id
+        // +"\n link: " + link
+        // +"\n openerTabId: " + openerTabId
+        // // +"\n children: " + children
+        // );
         // this._children = children;
         // var children_counter=0;
         // this._openerTabId;
@@ -40,7 +37,7 @@
 
     function addChild(openerTabId, tab){
         addChildHelper(openerTabId, rootNode, tab);
-        alert("Children added");
+        // alert("Children added");
     }
 
     function addChildHelper(parentId, currTab, nTab) {
