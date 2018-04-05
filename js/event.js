@@ -21,6 +21,7 @@ chrome.tabs.onCreated.addListener(function(tab){
     localStorage.setItem("rootNode",myJson);
     console.log(localStorage.getItem("rootNode"));
 });
+
 function handleCreation(tab){
 
 }
@@ -44,8 +45,33 @@ function handleUpdated(tabId, changeInfo) {
 
 
 }
+// function change(change,changeInfo){
+//     //ChangeInfo tab.name
+//     //change name
+//     ChangeInfo = change;
 
-chrome.tabs.onUpdated.addListener(handleUpdated);
+// }
+// change("name",currTab.name);
+
+// function update(tabId, name, urlString){
+//     findTab(tabId, rootNode, name, urlString);
+
+// }
+
+// function findTab(tabId,currTab){
+//     if (currTab.id == tabId) {
+//         // use push
+
+//     } else {
+//         console.log("False");
+//         for (var i = 0; i < currTab.children.length; i++) {
+//             findTab(tabId, currTab.children[i]);
+//         }
+//     }
+
+// }
+
+// chrome.tabs.onUpdated.addListener(handleUpdated);
 
 // //message listener (from popup manipulation)
 // chrome.runtime.onMessage.addListener(
