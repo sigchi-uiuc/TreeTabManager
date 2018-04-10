@@ -11,14 +11,13 @@ chrome.tabs.onCreated.addListener(function(tab){
 
     } 
     else {
-        // console.log("New Tab in tree");
+        console.log("New Tab in tree");
         console.log(tab.title + " Opened");
         var temp = new Node(tab.title, tab.id, tab.url, tab.openerTabId);
         addChild(tab.openerTabId, temp);
     }
-    var myJson = JSON.stringify(treeData);
-    console.log(myJson);
-    localStorage.setItem("rootNode",myJson);
+    
+    saveData();
     console.log(localStorage.getItem("rootNode"));
 });
 
@@ -41,9 +40,11 @@ chrome.tabs.onRemoved.addListener(handleRemoved);
 
 function handleUpdated(tabId, changeInfo) {
   // alert("Tab: " + tabId + " is updated \n Status: " 
-  	// + changeInfo.status + "\nTitle: " + changeInfo.title + "\n URL: " + changeInfo.url );
-
-
+  // 	+ changeInfo.status + "\nTitle: " + changeInfo.title + "\n URL: " + changeInfo.url );
+  if (changeInfo.title != undefined) {
+     // alert("Updating tab: " + tabId + " \n Setting name to : " + changeInfo.title );
+    updateNodeName(tabId, changeInfo.title);
+  }
 }
 // function change(change,changeInfo){
 //     //ChangeInfo tab.name
@@ -71,7 +72,7 @@ function handleUpdated(tabId, changeInfo) {
 
 // }
 
-// chrome.tabs.onUpdated.addListener(handleUpdated);
+chrome.tabs.onUpdated.addListener(handleUpdated);
 
 // //message listener (from popup manipulation)
 // chrome.runtime.onMessage.addListener(
