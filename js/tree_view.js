@@ -34,7 +34,7 @@ $(document).ready(function() {
             .offset([10, 0])
             .direction("s")
             .html(function(d) {
-                return d.url;
+                return d.name;
             });
 
   svg.call(tip);
@@ -86,7 +86,9 @@ $(document).ready(function() {
       .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
+      .text(function(d) {                 
+                var ret = d.name.substr(0,6) + "...";
+                return ret;; })
       .style("transform", "translate(200px,0px")
       .style("fill-opacity", 1e-6);
 
