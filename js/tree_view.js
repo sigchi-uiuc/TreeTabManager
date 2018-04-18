@@ -34,7 +34,11 @@ $(document).ready(function() {
             .offset([10, 0])
             .direction("s")
             .html(function(d) {
-                return d.name;
+                var hist = "";
+                for (var i = d.history.length - 1; i >= 0; i--) {
+                    hist += d.history[i] + "<br>";
+                }
+                return hist;
             });
 
   svg.call(tip);
@@ -86,7 +90,7 @@ $(document).ready(function() {
       .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) {                 
+      .text(function(d) {         
                 var ret = d.name.substr(0,6) + "...";
                 return ret;; })
       .style("transform", "translate(200px,0px")

@@ -12,6 +12,7 @@ function Tree() {
 
 function Node(title, id, link, openerTabId) {
     this.name = title;
+    this.history = [title];
     this.id = id;
     this.url = link;
     if (openerTabId == null) {
@@ -64,7 +65,10 @@ function updateNodeName(tabId, newName) {
 
 function updateNodeNameHelper(currTab, tabId, newName) {
     if (currTab.id == tabId) {
-        currTab.name = newName;
+        if (newName != currTab.name) {
+            currTab.name = newName;
+            currTab.history.push(newName);
+        }
         return;
     } else {
         var currChildren = currTab.children;
