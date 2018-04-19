@@ -9,14 +9,14 @@ chrome.tabs.onCreated.addListener(function(tab){
         console.log(tab.title + " Opened");
     	treeData.push(rootNode);
 
-    } 
+    }
     else {
         console.log("New Tab in tree");
         console.log(tab.title + " Opened");
         var temp = new Node(tab.title, tab.id, tab.url, tab.openerTabId);
         addChild(tab.openerTabId, temp);
     }
-    
+
     saveData();
     console.log(localStorage.getItem("rootNode"));
 });
@@ -28,7 +28,7 @@ function handleCreation(tab){
 // //tab removed listener
 function handleRemoved(tabId, removeInfo) {
   // alert("Tab: " + tabId + " is closing \n Window ID: " + removeInfo.windowId + "\nWindow is closing: " + removeInfo.isWindowClosing);
-
+  removeTab(tabId);
 
 }
 
@@ -38,8 +38,10 @@ chrome.tabs.onRemoved.addListener(handleRemoved);
 // var data_test = "data test succsss";
 // //tab updated listener
 
+chrome.tabs.onUpdated.addListener(handleUpdated);
+
 function handleUpdated(tabId, changeInfo) {
-  // alert("Tab: " + tabId + " is updated \n Status: " 
+  // alert("Tab: " + tabId + " is updated \n Status: "
   // 	+ changeInfo.status + "\nTitle: " + changeInfo.title + "\n URL: " + changeInfo.url );
   if (changeInfo.title != undefined) {
      // alert("Updating tab: " + tabId + " \n Setting name to : " + changeInfo.title );
@@ -72,14 +74,12 @@ function handleUpdated(tabId, changeInfo) {
 
 // }
 
-chrome.tabs.onUpdated.addListener(handleUpdated);
-
 // //message listener (from popup manipulation)
 // chrome.runtime.onMessage.addListener(
 // 	function(request, sender, sendResponse) {
 // 		if(request.command == "shiftLevel"){
 // 			var targetId = request.targetId;
-// 			treeShiftLevel(targetId);	
+// 			treeShiftLevel(targetId);
 // 			sendResponse({status: "success"});
 // 		}
 // 	}

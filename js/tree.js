@@ -22,6 +22,7 @@ function Node(title, id, link, openerTabId) {
         this.parent = openerTabId;
     }
     this.children = [];
+    this.active = true;
 
     // alert("New Node Object Created: "
     // +"\n title: " + title
@@ -55,11 +56,29 @@ function addChildHelper(parentId, currTab, nTab) {
 	}
 }
 
+function removeTab(tabId) {
+  console.log(treeData);
+  removeTabHelper(tabId, rootNode);
+  console.log(treeData);
+  saveData();
+}
+
+function removeTabHelper(tabId, currTab) {
+  if (tabId == currTab.id) {
+    currTab.active = false;
+  }
+  else {
+    for (var i = 0; i < currTab.children.length; i++) {
+      removeTabHelper(tabId, currTab.children[i]);
+    }
+  }
+}
+
 function updateNodeName(tabId, newName) {
     console.log(treeData);
     updateNodeNameHelper(rootNode, tabId, newName);
     console.log(treeData);
-    saveData()
+    saveData();
 
 }
 
@@ -99,8 +118,3 @@ function saveData() {
 // var run = "hello";
 
 // var roots = { 0:targetJson};
-
-
-
-
-

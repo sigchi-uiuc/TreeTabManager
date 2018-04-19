@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     /******* TESTING JSON AND D3 *********/
     // var tree1 = JSON.stringify(tree._root)
-    // var treeData = JSON.parse(tree1); 
+    // var treeData = JSON.parse(tree1);
     // console.log(tree1);
 
     // Traversal(tree._root);
@@ -57,7 +57,7 @@ $(document).ready(function() {
   console.log(treeData);
 
   update(root);
-   
+
   d3.select(self.frameElement).style("height", "500px");
 
   function update(source) {
@@ -81,7 +81,14 @@ $(document).ready(function() {
 
     nodeEnter.append("circle")
       .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; })
+      .style("stroke", function(d) {
+        if (d.active) {
+          return "#00cc66";
+        }
+        else {
+          return "#f70404";
+        }
+      })
       .style("transform", "translate(200px,0px")
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
@@ -90,7 +97,7 @@ $(document).ready(function() {
       .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) {         
+      .text(function(d) {
                 var ret = d.name.substr(0,6) + "...";
                 return ret;; })
       .style("transform", "translate(200px,0px")
@@ -168,4 +175,3 @@ $(document).ready(function() {
 // }
 
 });
-
