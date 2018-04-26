@@ -1,5 +1,4 @@
 chrome.tabs.onCreated.addListener(function(tab){
-	// alert("Tab created");
 	// alert("New Tab Created");
 	// Node.addNode(temp);
     // count++;
@@ -40,12 +39,13 @@ chrome.tabs.onRemoved.addListener(handleRemoved);
 
 chrome.tabs.onUpdated.addListener(handleUpdated);
 
-function handleUpdated(tabId, changeInfo) {
+function handleUpdated(tabId, changeInfo, tab) {
   // alert("Tab: " + tabId + " is updated \n Status: "
   // 	+ changeInfo.status + "\nTitle: " + changeInfo.title + "\n URL: " + changeInfo.url );
+
   if (changeInfo.title != undefined) {
      // alert("Updating tab: " + tabId + " \n Setting name to : " + changeInfo.title );
-    updateNodeName(tabId, changeInfo.title);
+    updateNodeName(tabId, changeInfo.title, tab.url);
   }
 }
 // function change(change,changeInfo){

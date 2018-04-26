@@ -74,25 +74,25 @@ function removeTabHelper(tabId, currTab) {
   }
 }
 
-function updateNodeName(tabId, newName) {
+function updateNodeName(tabId, newName, newUrl) {
     console.log(treeData);
-    updateNodeNameHelper(rootNode, tabId, newName);
+    updateNodeNameHelper(rootNode, tabId, newName, newUrl);
     console.log(treeData);
     saveData();
-
 }
 
-function updateNodeNameHelper(currTab, tabId, newName) {
+function updateNodeNameHelper(currTab, tabId, newName, newUrl) {
     if (currTab.id == tabId) {
-        if (newName != currTab.name) {
+        if (newName != currTab.name && newUrl != currTab.url) {
             currTab.name = newName;
             currTab.history.push(newName);
+            currTab.url = newUrl;
         }
         return;
     } else {
         var currChildren = currTab.children;
         for (var i = 0; i < currChildren.length; i++) {
-            updateNodeNameHelper(currTab.children[i], tabId, newName);
+            updateNodeNameHelper(currTab.children[i], tabId, newName, newUrl);
         }
     }
 }
