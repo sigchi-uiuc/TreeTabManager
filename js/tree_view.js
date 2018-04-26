@@ -11,59 +11,62 @@ $(document).ready(function() {
 
     // var visualize = function(data){
     /***** TEST ******/
+var treeData2;
+var treeData;
+    chrome.windows.getCurrent(function(w) {
+       treeData2 = localStorage.getItem("forest");
+       treeData3 = JSON.parse(treeData2)[w.id];
+       console.log(treeData3);
+        treeData = [treeData3];
 
-  var treeData2 = localStorage.getItem("rootNode");
-  // console.log(treeData2);
-  var treeData = JSON.parse(treeData2);
-  console.log(treeData);
-  var margin = {top: 80, right: 0, bottom: 50, left: 30},
-    width = 1600 - margin.right - margin.left,
-    height = 500 - margin.top - margin.bottom;
+    var margin = {top: 80, right: 0, bottom: 50, left: 30},
+      width = 1600 - margin.right - margin.left,
+      height = 500 - margin.top - margin.bottom;
 
-  var svg = d3.select("#body")
-          .append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom);
+    var svg = d3.select("#body")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom);
 
-  var i = 0,
-  duration = 750,
-  root;
+    var i = 0, root;
 
-  var tip = d3.tip()
-            .attr('class', 'd3-tip')
-            .offset([10, 0])
-            .direction("s")
-            .html(function(d) {
-                var hist = "";
-                for (var i = d.history.length - 1; i >= 0; i--) {
-                    hist += d.history[i] + "<br>";
-                }
-                return hist;
-            });
+    var tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([10, 0])
+              .direction("s")
+              .html(function(d) {
+                  var hist = "";
+                  for (var i = d.history.length - 1; i >= 0; i--) {
+                      hist += d.history[i] + "<br>";
+                  }
+                  return hist;
+              });
 
-  svg.call(tip);
+    svg.call(tip);
 
-  var tree = d3.layout.tree()
-    .size([height, width]);
+    var tree = d3.layout.tree()
+      .size([height, width]);
 
-  var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+    var diagonal = d3.svg.diagonal()
+      .projection(function(d) { return [d.y, d.x]; });
 
 
-  root = treeData[0];
-  root.x0 = 200;
-  root.y0 = 100;
+    root = treeData[0];
+    root.x0 = 200;
+    root.y0 = 100;
 
-  console.log(treeData);
+    console.log(treeData[0]);
 
-  update(root);
+    update(root, tree, svg, tip);
 
-  d3.select(self.frameElement).style("height", "500px");
+    d3.select(self.frameElement).style("height", "500px");
 
-  function update(source) {
+  });
+
+  function update(source, tree, svg, tip) {
 
     // Compute the new tree layout.
-    var nodes = tree.nodes(root).reverse(),
+    var nodes = tree.nodes(source).reverse(),
       links = tree.links(nodes);
 
     // Normalize for fixed-depth.
@@ -104,6 +107,7 @@ $(document).ready(function() {
       .style("fill-opacity", 1e-6);
 
     // Transition nodes to their new position.
+    var duration = 750;
     var nodeUpdate = node.transition()
       .duration(duration)
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });

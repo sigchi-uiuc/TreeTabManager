@@ -4,16 +4,16 @@ chrome.tabs.onCreated.addListener(function(tab){
     // count++;
     if (tab.openerTabId == null) {
     	// rootNode = new Node ("test", count, "test.com", count+4);
-        rootNode = new Node(tab.title, tab.id, tab.url, tab.openerTabId);
+        rootNode = new Node(tab.title, tab.id, tab.url, tab.openerTabId, tab.windowId);
         console.log(tab.title + " Opened");
-    	treeData.push(rootNode);
-
+        treeData.push(rootNode);
+        forest[tab.windowId] = rootNode;
     }
     else {
         console.log("New Tab in tree");
         console.log(tab.title + " Opened");
-        var temp = new Node(tab.title, tab.id, tab.url, tab.openerTabId);
-        addChild(tab.openerTabId, temp);
+        var temp = new Node(tab.title, tab.id, tab.url, tab.openerTabId, tab.windowId);
+        addChild(tab.openerTabId, temp, tab.windowId);
     }
 
     saveData();
@@ -27,7 +27,7 @@ function handleCreation(tab){
 // //tab removed listener
 function handleRemoved(tabId, removeInfo) {
   // alert("Tab: " + tabId + " is closing \n Window ID: " + removeInfo.windowId + "\nWindow is closing: " + removeInfo.isWindowClosing);
-  removeTab(tabId);
+  removeTab(tabId, tab.windowId);
 
 }
 
@@ -45,7 +45,7 @@ function handleUpdated(tabId, changeInfo, tab) {
 
   if (changeInfo.title != undefined) {
      // alert("Updating tab: " + tabId + " \n Setting name to : " + changeInfo.title );
-    updateNodeName(tabId, changeInfo.title, tab.url);
+    updateNodeName(tabId, tab.windowId, changeInfo.title, tab.url);
   }
 }
 // function change(change,changeInfo){

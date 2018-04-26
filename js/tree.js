@@ -1,4 +1,5 @@
 var count = 0;
+var forest = {};
 var treeData = [];
 var rootNode;
 // var rootNode = new Node("One", 23832, "test.com", 48248);
@@ -6,14 +7,15 @@ var rootNode;
 
 function Tree() {
     // alert("Tree created");
-    treeData.push(rootNode);
-    var treeDataParsed = JSON.stringify(treeData);
+    // treeData.push(rootNode);
+    // var treeDataParsed = JSON.stringify(treeData);
 }
 
-function Node(title, id, link, openerTabId) {
+function Node(title, id, link, openerTabId, windowid) {
     this.name = title;
     this.history = [title];
     this.id = id;
+    this.windowid = windowid;
     this.url = link;
     if (openerTabId == null) {
         this.parent = 2308;
@@ -37,8 +39,8 @@ function Node(title, id, link, openerTabId) {
 
 }
 
-function addChild(openerTabId, tab){
-    addChildHelper(openerTabId, rootNode, tab);
+function addChild(openerTabId, tab, windowid){
+    addChildHelper(openerTabId, forest[windowid], tab);
     // alert("Children added");
 }
 
@@ -56,9 +58,9 @@ function addChildHelper(parentId, currTab, nTab) {
 	}
 }
 
-function removeTab(tabId) {
+function removeTab(tabId, windowid) {
   console.log(treeData);
-  removeTabHelper(tabId, rootNode);
+  removeTabHelper(tabId, forest[windowid]);
   console.log(treeData);
   saveData();
 }
@@ -74,9 +76,9 @@ function removeTabHelper(tabId, currTab) {
   }
 }
 
-function updateNodeName(tabId, newName, newUrl) {
+function updateNodeName(tabId, windowid, newName, newUrl) {
     console.log(treeData);
-    updateNodeNameHelper(rootNode, tabId, newName, newUrl);
+    updateNodeNameHelper(forest[windowid], tabId, newName, newUrl);
     console.log(treeData);
     saveData();
 }
@@ -98,9 +100,9 @@ function updateNodeNameHelper(currTab, tabId, newName, newUrl) {
 }
 
 function saveData() {
-    var myJson = JSON.stringify(treeData);
+    var myJson = JSON.stringify(forest);
     console.log(myJson);
-    localStorage.setItem("rootNode",myJson);
+    localStorage.setItem("forest",myJson);
 }
 
 // function (parent, child) {
