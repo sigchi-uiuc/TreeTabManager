@@ -1,86 +1,100 @@
 chrome.tabs.onCreated.addListener(function(tab){
-	// alert("New Tab Created");
-	// Node.addNode(temp);
-    // count++;
-    if (tab.openerTabId == null) {
-    	// rootNode = new Node ("test", count, "test.com", count+4);
-        rootNode = new Node(tab.title, tab.id, tab.url, tab.openerTabId, tab.windowId);
-        console.log(tab.title + " Opened");
-        treeData.push(rootNode);
-        forest[tab.windowId] = rootNode;
+
+    var temp = new Node(tab.title, tab.id, tab.url, tab.openerTabId, tab.windowId);
+    if (forest[tab.windowId] == null) {
+      console.log("forest is empty");
+      console.log(tab.windowId);
+      forest[tab.windowId] = temp;
+      console.log(forest);
     }
     else {
-        console.log("New Tab in tree");
-        console.log(tab.title + " Opened");
-        var temp = new Node(tab.title, tab.id, tab.url, tab.openerTabId, tab.windowId);
-        addChild(tab.openerTabId, temp, tab.windowId);
+      addChild(forest[tab.windowId],tab.openerTabId, temp);      
+      console.log("new tree in the forest");
+      console.log(forest);
     }
-
-    saveData();
-    console.log(localStorage.getItem("rootNode"));
+   
 });
-
-function handleCreation(tab){
-
-}
-
-// //tab removed listener
-function handleRemoved(tabId, removeInfo) {
-  // alert("Tab: " + tabId + " is closing \n Window ID: " + removeInfo.windowId + "\nWindow is closing: " + removeInfo.isWindowClosing);
-  removeTab(tabId, tab.windowId);
-
-}
 
 chrome.tabs.onRemoved.addListener(handleRemoved);
 
+function handleRemoved(tabId, removeInfo) {
+  // alert("Tab: " + tabId + " is closing \n Window ID: " + removeInfo.windowId + "\nWindow is closing: " + removeInfo.isWindowClosing);
+    var winId = removeInfo.windowId;
+    if(removeInfo.isWindowClosing){
+      delete forest[winId];
+    }
+    var temp = findNodeByID(forest[winId], tabId);
+    if(temp == null) {
+      return;
+    }
+    console.log("removing: ");
+    console.log(temp);
+    temp.active = false;
+}
 
-// var data_test = "data test succsss";
-// //tab updated listener
 
 chrome.tabs.onUpdated.addListener(handleUpdated);
 
-function handleUpdated(tabId, changeInfo, tab) {
-  // alert("Tab: " + tabId + " is updated \n Status: "
-  // 	+ changeInfo.status + "\nTitle: " + changeInfo.title + "\n URL: " + changeInfo.url );
-
-  if (changeInfo.title != undefined) {
-     // alert("Updating tab: " + tabId + " \n Setting name to : " + changeInfo.title );
-    updateNodeName(tabId, tab.windowId, changeInfo.title, tab.url);
+function handleUpdated(tabId, changeInfo, tab) { 
+  if(forest[tab.windowId] == null){ 
+  // Test fix: this can throw errors if the extension is relaunched with windows not already in the data structure.
+    return;
+  }
+  var newName = changeInfo.title;
+  if (newName != undefined) {
+      var temp = findNodeByID(forest[tab.windowId], tabId);
+      console.log("Before:");
+      console.log(temp);
+      //find the tab to update
+      if (newName != temp.name && tab.url != temp.url) {
+          temp.name = newName;
+          temp.history.push(newName);
+          temp.url = tab.url;
+      }
+      console.log("Updated Info: ");
+      console.log(temp);
   }
 }
-// function change(change,changeInfo){
-//     //ChangeInfo tab.name
-//     //change name
-//     ChangeInfo = change;
 
-// }
-// change("name",currTab.name);
 
-// function update(tabId, name, urlString){
-//     findTab(tabId, rootNode, name, urlString);
 
-// }
 
-// function findTab(tabId,currTab){
-//     if (currTab.id == tabId) {
-//         // use push
 
-//     } else {
-//         console.log("False");
-//         for (var i = 0; i < currTab.children.length; i++) {
-//             findTab(tabId, currTab.children[i]);
+
+// function handleUpdated(tabId, changeInfo, tab) {
+//   // alert("Tab: " + tabId + " is updated \n Status: "
+//   //  + changeInfo.status + "\nTitle: " + changeInfo.title + "\n URL: " + changeInfo.url );
+//         // console.log("windowid: " + tab.windowId);
+//       // console.log("tabid: " + tabId);
+//       console.log("*********** Updated: ***********");
+//       console.log(changeInfo);
+//       // console.log("status: " + changeInfo.status);
+//   if(forest[tab.windowId] == null){ 
+//   // Test fix: this can throw errors if the extension is relaunched with windows not already in the data structure.
+//     return;
+//   }
+//   // if(changeInfo.status != null){
+//     // if(changeInfo.status.localeCompare("complete") == 0){
+//   //Debugger: update listener can update multiple times, this allows it only to run after it is truly complete.
+
+//       var temp = findNodeByID(forest[tab.windowId], tabId);
+//       //find the tab to update
+//       if(changeInfo.title != null){ //only runs if the title isn't undefined.
+//         temp.name = changeInfo.title; 
+//         if(changeInfo.title.localeCompare("New Tab") != 0){ // New Tab can update multiple times for extensions.
+//           temp.history.push(changeInfo.title);
 //         }
-//     }
 
+//       }
+//       console.log(tab);
+//       console.log("Break");
+//       console.log(tab.url);
+//       if(tab.url != null){
+//         temp.url = tab.url;
+//       }
+//       console.log("Updated Info: ");
+//       console.log(temp);
+//       // console.log(forest);
+//     // }
+//   // }
 // }
-
-// //message listener (from popup manipulation)
-// chrome.runtime.onMessage.addListener(
-// 	function(request, sender, sendResponse) {
-// 		if(request.command == "shiftLevel"){
-// 			var targetId = request.targetId;
-// 			treeShiftLevel(targetId);
-// 			sendResponse({status: "success"});
-// 		}
-// 	}
-// );

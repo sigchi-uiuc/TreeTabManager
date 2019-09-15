@@ -1,4 +1,4 @@
-    function Node(alive, tab_id, url, title, favicon_url, children) {
+function Node(alive, tab_id, url, title, favicon_url, children) {
     this._alive = alive;
     this._tab_id = tab_id;
     this._url = url;

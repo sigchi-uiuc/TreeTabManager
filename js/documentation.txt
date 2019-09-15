@@ -1,0 +1,23 @@
+One local storage variable for one tree (window), this saves traversal time.
+
+Tree contains
+
+
+
+
+Node contains:
+Name of tab (title)
+Tab ID (Tab ID)
+WindowID (Not needed if it's under a windowID tree, needed if we were to re-arrange tabs and expect the visualization to re-correct itself)
+URL - TabURL
+children (empty children array)
+active -closed or not
+
+History of the Tab
+
+    else {
+        this.parent = openerTabId;
+    }
+    this.children = [];
+    this.active = true;
+    
